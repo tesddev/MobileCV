@@ -118,13 +118,14 @@ class EditCVDetailsViewController: UIViewController {
         return label
     }()
     
-    var theBriefBioLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Experienced iOS developer with a strong background in Swift and other iOS frameworks."
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 0
-        label.font = .boldSystemFont(ofSize: 16)
-        return label
+    let bioTextView: UITextView = {
+        let textView = UITextView()
+        textView.contentInsetAdjustmentBehavior = .automatic
+        textView.backgroundColor = .lightGray.withAlphaComponent(0.1)
+        textView.font = .systemFont(ofSize: 14)
+        textView.layer.cornerRadius = 8
+        textView.translatesAutoresizingMaskIntoConstraints = false
+        return textView
     }()
     
     lazy var saveButton: UIButton = {
@@ -147,7 +148,9 @@ class EditCVDetailsViewController: UIViewController {
         fullNameTextField.delegate = self
         slackNameTextField.delegate = self
         githubHandleTextField.delegate = self
+        bioTextView.delegate = self
         activateConstraint()
+        hideKeyboardWhenTappedAround()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -158,7 +161,7 @@ class EditCVDetailsViewController: UIViewController {
         fullNameTextField.text = CVModel.fullName
         slackNameTextField.text = CVModel.slackName
         githubHandleTextField.text = CVModel.githubHandle
-        theBriefBioLabel.text = CVModel.bio
+        bioTextView.text = CVModel.bio
     }
     
     private func activateConstraint() {
@@ -172,7 +175,7 @@ class EditCVDetailsViewController: UIViewController {
         view.addSubview(githubHandleTextField)
         view.addSubview(slackNameTextField)
         view.addSubview(briefBioLabel)
-        view.addSubview(theBriefBioLabel)
+        view.addSubview(bioTextView)
         
         NSLayoutConstraint.activate([
             backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
@@ -210,11 +213,12 @@ class EditCVDetailsViewController: UIViewController {
             briefBioLabel.topAnchor.constraint(equalTo: githubHandleTextField.bottomAnchor, constant: 16),
             briefBioLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
             
-            theBriefBioLabel.topAnchor.constraint(equalTo: briefBioLabel.bottomAnchor, constant: 20),
-            theBriefBioLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
-            theBriefBioLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            bioTextView.topAnchor.constraint(equalTo: briefBioLabel.bottomAnchor, constant: 6),
+            bioTextView.widthAnchor.constraint(equalTo: saveButton.widthAnchor),
+            bioTextView.heightAnchor.constraint(equalToConstant: 200),
+            bioTextView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             
-            saveButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20),
+            saveButton.topAnchor.constraint(equalTo: bioTextView.bottomAnchor, constant: 20),
             saveButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
             saveButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
             saveButton.heightAnchor.constraint(equalToConstant: 40),
@@ -236,9 +240,31 @@ class EditCVDetailsViewController: UIViewController {
 
 }
 
-extension EditCVDetailsViewController: UITextFieldDelegate {
+extension EditCVDetailsViewController: UITextFieldDelegate, UITextViewDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
+    }
+    
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        self.view.frame.origin.y = 0 - 200
+        return true
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        self.view.frame.origin.y = 0
+    }
+    
+}
+
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
