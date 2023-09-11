@@ -13,6 +13,8 @@
 		82AD09FF2AAF091C00942E76 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82AD09FD2AAF091C00942E76 /* Main.storyboard */; };
 		82AD0A012AAF091E00942E76 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82AD0A002AAF091E00942E76 /* Assets.xcassets */; };
 		82AD0A042AAF091E00942E76 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82AD0A022AAF091E00942E76 /* LaunchScreen.storyboard */; };
+		82AD0A0C2AAF15E300942E76 /* CVModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AD0A0B2AAF15E300942E76 /* CVModel.swift */; };
+		82AD0A0E2AAF171300942E76 /* EditCVDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82AD0A0D2AAF171300942E76 /* EditCVDetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		82AD0A002AAF091E00942E76 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		82AD0A032AAF091E00942E76 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		82AD0A052AAF091E00942E76 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		82AD0A0B2AAF15E300942E76 /* CVModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVModel.swift; sourceTree = "<group>"; };
+		82AD0A0D2AAF171300942E76 /* EditCVDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditCVDetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,11 +62,13 @@
 			children = (
 				82AD09F72AAF091C00942E76 /* AppDelegate.swift */,
 				82AD09F92AAF091C00942E76 /* SceneDelegate.swift */,
+				82AD0A0D2AAF171300942E76 /* EditCVDetailsViewController.swift */,
 				82AD09FB2AAF091C00942E76 /* ViewController.swift */,
 				82AD09FD2AAF091C00942E76 /* Main.storyboard */,
 				82AD0A002AAF091E00942E76 /* Assets.xcassets */,
 				82AD0A022AAF091E00942E76 /* LaunchScreen.storyboard */,
 				82AD0A052AAF091E00942E76 /* Info.plist */,
+				82AD0A0B2AAF15E300942E76 /* CVModel.swift */,
 			);
 			path = MobileCV;
 			sourceTree = "<group>";
@@ -138,8 +144,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82AD0A0E2AAF171300942E76 /* EditCVDetailsViewController.swift in Sources */,
 				82AD09FC2AAF091C00942E76 /* ViewController.swift in Sources */,
 				82AD09F82AAF091C00942E76 /* AppDelegate.swift in Sources */,
+				82AD0A0C2AAF15E300942E76 /* CVModel.swift in Sources */,
 				82AD09FA2AAF091C00942E76 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
