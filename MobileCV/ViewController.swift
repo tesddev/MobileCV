@@ -18,7 +18,7 @@ class ViewController: UIViewController {
     
     var nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Name:"
+        label.text = "Full Name:"
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 16)
         label.textColor = .gray
@@ -27,16 +27,16 @@ class ViewController: UIViewController {
     
     var slackNameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Slack name:"
+        label.text = "Slack Username:"
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 16)
         label.textColor = .gray
         return label
     }()
     
-    var trackLabel: UILabel = {
+    var githubLabel: UILabel = {
         let label = UILabel()
-        label.text = "Track:"
+        label.text = "Github Handle:"
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .systemFont(ofSize: 16)
         label.textColor = .gray
@@ -59,9 +59,9 @@ class ViewController: UIViewController {
         return label
     }()
     
-    var theTrackLabel: UILabel = {
+    var githubHandleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Mobile"
+        label.text = "tesddev"
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .boldSystemFont(ofSize: 16)
         return label
@@ -75,12 +75,30 @@ class ViewController: UIViewController {
         return view
     }()
     
-    lazy var profileImageView: UIView = {
+    lazy var bioView: UIView = {
         let view = UIView()
         view.backgroundColor = .systemGreen.withAlphaComponent(0.1)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 8
         return view
+    }()
+    
+    var briefBioLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Personal Bio"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .boldSystemFont(ofSize: 17)
+        label.textColor = .gray
+        return label
+    }()
+    
+    var theBriefBioLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Experienced iOS developer with a strong background in Swift and other iOS frameworks. \n\nProven track record of developing high-quality, user-friendly mobile apps that have been featured in the App Store. \n\nSkilled in collaborating with cross-functional teams to deliver innovative solutions on time and within budget. \n\nAlso skilled in technologies like Swift Programming Language, Version Control, Cocoa Touch, Jira, Trello, Azure, among others, integrating 3rd party libraries, consuming Restful APIs, working with Agile/Scrum team in Sprints. \n\nCommitted to staying current with the latest technologies and industry trends. Obsessed with detail and quality."
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        label.font = .boldSystemFont(ofSize: 16)
+        return label
     }()
     
     lazy var editButton: UIButton = {
@@ -109,13 +127,14 @@ class ViewController: UIViewController {
         view.addSubview(editButton)
         view.addSubview(detailsView)
         detailsView.addSubview(nameLabel)
-        detailsView.addSubview(trackLabel)
+        detailsView.addSubview(githubLabel)
         detailsView.addSubview(slackNameLabel)
         detailsView.addSubview(theNameLabel)
         detailsView.addSubview(theSlackNameLabel)
-        detailsView.addSubview(theTrackLabel)
-        view.addSubview(profileImageView)
-
+        detailsView.addSubview(githubHandleLabel)
+        view.addSubview(bioView)
+        bioView.addSubview(briefBioLabel)
+        bioView.addSubview(theBriefBioLabel)
         
         NSLayoutConstraint.activate([
             headerLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
@@ -123,7 +142,7 @@ class ViewController: UIViewController {
             
             detailsView.topAnchor.constraint(equalTo: headerLabel.bottomAnchor, constant: 30),
             detailsView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            detailsView.widthAnchor.constraint(equalTo: profileImageView.widthAnchor),
+            detailsView.widthAnchor.constraint(equalTo: bioView.widthAnchor),
             detailsView.heightAnchor.constraint(equalToConstant: 160),
             
             nameLabel.topAnchor.constraint(equalTo: detailsView.topAnchor, constant: 20),
@@ -132,8 +151,8 @@ class ViewController: UIViewController {
             slackNameLabel.centerYAnchor.constraint(equalTo: detailsView.centerYAnchor),
             slackNameLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
             
-            trackLabel.bottomAnchor.constraint(equalTo: detailsView.bottomAnchor, constant: -20),
-            trackLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
+            githubLabel.bottomAnchor.constraint(equalTo: detailsView.bottomAnchor, constant: -20),
+            githubLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
             
             theNameLabel.topAnchor.constraint(equalTo: detailsView.topAnchor, constant: 20),
             theNameLabel.trailingAnchor.constraint(equalTo: detailsView.trailingAnchor, constant: -20),
@@ -141,13 +160,20 @@ class ViewController: UIViewController {
             theSlackNameLabel.centerYAnchor.constraint(equalTo: detailsView.centerYAnchor),
             theSlackNameLabel.trailingAnchor.constraint(equalTo: theNameLabel.trailingAnchor),
             
-            theTrackLabel.bottomAnchor.constraint(equalTo: detailsView.bottomAnchor, constant: -20),
-            theTrackLabel.trailingAnchor.constraint(equalTo: theNameLabel.trailingAnchor),
+            githubHandleLabel.bottomAnchor.constraint(equalTo: detailsView.bottomAnchor, constant: -20),
+            githubHandleLabel.trailingAnchor.constraint(equalTo: theNameLabel.trailingAnchor),
             
-            profileImageView.topAnchor.constraint(equalTo: detailsView.bottomAnchor, constant: 30),
-            profileImageView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            profileImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30),
-            profileImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            bioView.topAnchor.constraint(equalTo: detailsView.bottomAnchor, constant: 30),
+            bioView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            bioView.bottomAnchor.constraint(equalTo: theBriefBioLabel.bottomAnchor, constant: 30),
+            bioView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            briefBioLabel.topAnchor.constraint(equalTo: bioView.topAnchor, constant: 20),
+            briefBioLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
+            
+            theBriefBioLabel.topAnchor.constraint(equalTo: briefBioLabel.bottomAnchor, constant: 20),
+            theBriefBioLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
+            theBriefBioLabel.trailingAnchor.constraint(equalTo: bioView.trailingAnchor, constant: -20),
             
             editButton.centerYAnchor.constraint(equalTo: headerLabel.centerYAnchor),
             editButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
