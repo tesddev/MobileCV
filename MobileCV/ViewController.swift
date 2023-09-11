@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     let contentView = UIView()
     var headerLabel: UILabel = {
         let label = UILabel()
-        label.text = "Curriculum Vitae"
+        label.text = "Tes' Curriculum Vitae"
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .boldSystemFont(ofSize: 20)
         return label
@@ -71,7 +71,7 @@ class ViewController: UIViewController {
     
     private let detailsView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemGreen.withAlphaComponent(0.1)
+        view.backgroundColor = .blue.withAlphaComponent(0.05)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 8
         return view
@@ -79,7 +79,7 @@ class ViewController: UIViewController {
     
     lazy var bioView: UIView = {
         let view = UIView()
-        view.backgroundColor = .systemGreen.withAlphaComponent(0.1)
+        view.backgroundColor = .blue.withAlphaComponent(0.05)
         view.translatesAutoresizingMaskIntoConstraints = false
         view.layer.cornerRadius = 8
         return view
@@ -96,7 +96,7 @@ class ViewController: UIViewController {
     
     var theBriefBioLabel: UILabel = {
         let label = UILabel()
-        label.text = "Experienced iOS developer with a strong background in Swift and other iOS frameworks. \n\nProven track record of developing high-quality, user-friendly mobile apps that have been featured in the App Store. \n\nSkilled in collaborating with cross-functional teams to deliver innovative solutions on time and within budget. \n\nAlso skilled in technologies like Swift Programming Language, Version Control, Cocoa Touch, Jira, Trello, Azure, among others, integrating 3rd party libraries, consuming Restful APIs, working with Agile/Scrum team in Sprints. \n\nCommitted to staying current with the latest technologies and industry trends. Obsessed with detail and quality."
+        label.text = "Experienced iOS developer with a strong background in Swift and other iOS frameworks."
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         label.font = .boldSystemFont(ofSize: 16)
@@ -122,6 +122,17 @@ class ViewController: UIViewController {
         navigationController?.interactivePopGestureRecognizer?.isEnabled = false
         self.navigationController?.isNavigationBarHidden = true
         activateConstraint()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        populateViewWithCVModel()
+    }
+    
+    func populateViewWithCVModel() {
+        theNameLabel.text = CVModel.fullName
+        theSlackNameLabel.text = CVModel.slackName
+        githubHandleLabel.text = CVModel.githubHandle
+        theBriefBioLabel.text = CVModel.bio
     }
     
     private func activateConstraint() {
@@ -212,8 +223,8 @@ class ViewController: UIViewController {
     }
     
     @objc func didTapEditButton(){
-//        let vc = GithubProfileViewController(link: "https://github.com/tesddev", isLinkTextfieldHidden: true)
-//        self.navigationController?.pushViewController(vc, animated: true)
+        let vc = EditCVDetailsViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
 }
