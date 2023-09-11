@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  MobileCV
 //
-//  Created by GIGL iOS on 11/09/2023.
+//  Created by Tes on 11/09/2023.
 //
 
 import UIKit
