@@ -8,6 +8,8 @@
 import UIKit
 
 class ViewController: UIViewController {
+    let scrollView = UIScrollView()
+    let contentView = UIView()
     var headerLabel: UILabel = {
         let label = UILabel()
         label.text = "Curriculum Vitae"
@@ -123,21 +125,39 @@ class ViewController: UIViewController {
     }
     
     private func activateConstraint() {
-        view.addSubview(headerLabel)
-        view.addSubview(editButton)
-        view.addSubview(detailsView)
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(headerLabel)
+        contentView.addSubview(editButton)
+        contentView.addSubview(detailsView)
         detailsView.addSubview(nameLabel)
         detailsView.addSubview(githubLabel)
         detailsView.addSubview(slackNameLabel)
         detailsView.addSubview(theNameLabel)
         detailsView.addSubview(theSlackNameLabel)
         detailsView.addSubview(githubHandleLabel)
-        view.addSubview(bioView)
+        contentView.addSubview(bioView)
         bioView.addSubview(briefBioLabel)
         bioView.addSubview(theBriefBioLabel)
         
+        scrollView.backgroundColor = UIColor.white
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.layer.cornerRadius = 10
+        
         NSLayoutConstraint.activate([
-            headerLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            scrollView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            contentView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            
+            headerLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             headerLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             
             detailsView.topAnchor.constraint(equalTo: headerLabel.bottomAnchor, constant: 30),
@@ -167,6 +187,8 @@ class ViewController: UIViewController {
             bioView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
             bioView.bottomAnchor.constraint(equalTo: theBriefBioLabel.bottomAnchor, constant: 30),
             bioView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            bioView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -30),
             
             briefBioLabel.topAnchor.constraint(equalTo: bioView.topAnchor, constant: 20),
             briefBioLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
