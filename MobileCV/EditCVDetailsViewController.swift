@@ -54,7 +54,6 @@ class EditCVDetailsViewController: UIViewController {
     
     let fullNameTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Item Name"
         textField.textColor = .black
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 0))
@@ -65,7 +64,7 @@ class EditCVDetailsViewController: UIViewController {
         textField.backgroundColor = .lightGray.withAlphaComponent(0.1)
         textField.isUserInteractionEnabled = true
         textField.layer.cornerRadius = 5
-        textField.placeholder = "Old password"
+        textField.placeholder = "Full Name"
         textField.autocorrectionType = .no
         textField.autocapitalizationType = .none
         return textField
@@ -73,7 +72,6 @@ class EditCVDetailsViewController: UIViewController {
     
     let slackNameTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Item Name"
         textField.textColor = .black
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 0))
@@ -84,7 +82,7 @@ class EditCVDetailsViewController: UIViewController {
         textField.backgroundColor = .lightGray.withAlphaComponent(0.1)
         textField.isUserInteractionEnabled = true
         textField.layer.cornerRadius = 5
-        textField.placeholder = "Old password"
+        textField.placeholder = "Slack Name"
         textField.autocorrectionType = .no
         textField.autocapitalizationType = .none
         return textField
@@ -92,7 +90,6 @@ class EditCVDetailsViewController: UIViewController {
     
     let githubHandleTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Item Name"
         textField.textColor = .black
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 0))
@@ -103,7 +100,7 @@ class EditCVDetailsViewController: UIViewController {
         textField.backgroundColor = .lightGray.withAlphaComponent(0.1)
         textField.isUserInteractionEnabled = true
         textField.layer.cornerRadius = 5
-        textField.placeholder = "Old password"
+        textField.placeholder = "Github Handle"
         textField.autocorrectionType = .no
         textField.autocapitalizationType = .none
         return textField
@@ -226,8 +223,32 @@ class EditCVDetailsViewController: UIViewController {
     }
     
     @objc func didTapSaveButton(){
-        let alertView = UIAlertController(title: "Alert!", message: "Information updated", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default, handler:{_ in
+        let newName = self.fullNameTextField.text?.trimmingCharacters(in: .whitespaces) ?? ""
+        let newSlackName = self.slackNameTextField.text?.trimmingCharacters(in: .whitespaces) ?? ""
+        let newGithubHandle = self.githubHandleTextField.text?.trimmingCharacters(in: .whitespaces) ?? ""
+        let newBio = self.bioTextView.text ?? ""
+        if newName == "" {
+            self.throwAlertWith(message: "Name field cannot be empty")
+            return
+        }
+        if newSlackName == "" {
+            self.throwAlertWith(message: "Slack name field cannot be empty")
+            return
+        }
+        if newGithubHandle == "" {
+            self.throwAlertWith(message: "Github handle field cannot be empty")
+            return
+        }
+        if newBio == "" {
+            self.throwAlertWith(message: "Bio field cannot be empty")
+            return
+        }
+        CVModel.bio = newBio
+        CVModel.fullName = newName
+        CVModel.githubHandle = newGithubHandle
+        CVModel.slackName = newSlackName
+        let alertView = UIAlertController(title: "Alert!", message: "Information successfully updated.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: {_ in
             self.navigationController?.popViewController(animated: true)
         })
         alertView.addAction(okAction)
@@ -236,6 +257,13 @@ class EditCVDetailsViewController: UIViewController {
     
     @objc func didTapBackButton() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    func throwAlertWith(message: String) {
+        let alertView = UIAlertController(title: "Alert!", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alertView.addAction(okAction)
+        self.present(alertView, animated: true, completion: nil)
     }
 
 }
